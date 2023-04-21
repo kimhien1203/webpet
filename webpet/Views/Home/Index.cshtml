@@ -1,0 +1,52 @@
+﻿@model IEnumerable<webpet.Models.Pet>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+@using (Html.BeginForm("Index", "Home", FormMethod.Get, new { @class = "form-inline" }))
+{
+    <div class="form-group form-inline" style="display: flex;">
+        <input type="Text" class="form-control col-md-10" value="@ViewBag.Keyword"
+               name="searchString" placeholder="Nhập tên  cần tìm">
+
+        <input type="submit" class="btn btn-info" value="Tìm kiếm nào" style="margin-left:10px;">
+
+    </div>
+
+    <br>
+}
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+            <div class="panel panel-default">
+                <div class="panel panel-heading">
+                    <strong>@item.ten</strong>
+                </div>
+                <div class="panel-body">
+                    <p><strong>Giá bán:</strong>@item.giaban<strong>VNĐ</strong></p>
+                    <p><strong>Ngày cập nhật:</strong>@item.ngaycapnhat</p>
+                    <p><strong>Xuất sứ:</strong>@item.xuatsu</p>
+                    <p><strong>Số lượng tồn:</strong>@item.soluong</p>
+                    <p><img src=" @item.hinh" alt="hinhthumnail"></p>
+                </div>
+
+                <div class="panel-footer " clearfix>
+                    <div class="DatMua">
+                        <a class="btn btn-success" href="@Url.Action("ThemGioHang", "GioHang",
+new { @id = item.mapet, @strURL = Request.Url.ToString() })">Đặt mua</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+

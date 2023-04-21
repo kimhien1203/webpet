@@ -1,0 +1,30 @@
+﻿@model webpet.Models.Pet
+
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Chi tiết sản phẩm</h2>
+<h2>@Html.DisplayFor(model=> model.ten)</h2>
+<div class="col-sm-12 col=md-12">
+    <div class="thumnail">
+        <img src="@Html.DisplayFor(model=>model.hinh)" alt="thumnail">
+    </div>
+    <div class="caption">
+        <p> Mã pet: @Html.DisplayFor(model => model.mapet) </p>
+        <p> Mã loại: @Html.DisplayFor(model => model.maloai) </p>
+        <p> Tên: @Html.DisplayFor(model => model.ten) </p>
+        <p> Xuất sứ: @Html.DisplayFor(model => model.xuatsu) </p>
+        <p> Giá bán: @Html.DisplayFor(model => model.giaban) </p>
+        <p> Số lượng: @Html.DisplayFor(model => model.soluong) </p>
+        <p> Ngày mở bán: @Html.DisplayFor(model => model.ngaymoban) </p>
+
+        <p> Ngày cập nhật: @Html.DisplayFor(model => model.ngaycapnhat) </p>
+
+        <p>
+            <a href="#" class="btn btn-primary" role="button"> Buy</a>
+            @Html.ActionLink("Trở về", "Index", "", new { @class = "btn btn-info" })
+        </p>
+    </div>
+</div>

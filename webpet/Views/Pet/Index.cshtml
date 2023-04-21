@@ -1,0 +1,97 @@
+﻿@model PagedList.IPagedList<webpet.Models.Pet>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+<p>
+    @Html.ActionLink("Thêm Sản phẩm", "Create", null, new { @class = "btn btn-warning" })
+</p>
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+            <div class="panel panel-default">
+                <div class="panel panel-heading">
+                    <strong>@item.ten</strong>
+                </div>
+                <div class="panel-body">
+                    <p><strong>Giá bán:</strong>@item.giaban<strong>VNĐ</strong></p>
+                    <p><strong>Ngày cập nhật:</strong>@item.ngaycapnhat</p>
+                    <p><strong>Xuất sứ:</strong>@item.xuatsu</p>
+                    <p><strong>Số lượng tồn:</strong>@item.soluong</p>
+                    <p><strong>Ngày mở bán:</strong>@item.ngaymoban</p>
+                    <p><img src="@item.hinh" alt="hinh thumbnail" width="250px"></p>
+
+                </div>
+                <div class="panel-footer " clearfix>
+                    @Html.ActionLink("Xem thêm...", "Detail", new { id = item.mapet }, new { @class = "btn btn-default" })
+                    @Html.ActionLink("Xóa", "Delete", new { id = item.mapet }, new { @class = "btn btn-success" })
+                    @Html.ActionLink("Sửa", "Edit", new { id = item.mapet }, new { @class = "btn btn-success" })
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<div>
+    <div>
+        Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) /
+        @Model.PageCount
+    </div>
+    <div class="MenuTrang">
+        @Html.PagedListPager(Model, page => Url.Action("Index", new
+        {
+            page = page
+        }))
+    </div>
+</div>
+<style>
+    .MenuTrang li {
+        display: inline;
+    }
+</style>
+<style type="text/css">
+
+    #mau-nut a {
+        clear: both;
+        background-color: orange;
+        color: snow;
+    }
+
+        #mau-nut a:hover {
+            background-color: darkcyan;
+            color: snow;
+        }
+</style>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        var maxLength = 100;
+        $(".show-read-more").each(function () {
+            var myStr = $(this).text();
+            if ($.trim(myStr).length > maxLength) {
+                var newStr = myStr.substring(0, maxLength);
+                var removedStr = myStr.substring(maxLength, $.trim(myStr).length);
+                $(this).empty().html(newStr);
+
+                $(this).append(' <a href="javascript:void(0);" class="read-more">đọc tiếp...</a>');
+
+                $(this).append('<span class="more-text">' + removedStr + '</span>');
+            }
+        });
+        $(".read-more").click(function () {
+            $(this).siblings(".more-text").contents().unwrap();
+            $(this).remove();
+        });
+    });
+</script>
+<style>
+    .show-read-more .more-text {
+        display: none;
+    }
+</style>
+

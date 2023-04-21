@@ -1,0 +1,36 @@
+﻿@model IEnumerable<webpet.Models.Pet>
+
+@{
+    ViewBag.Title = "ConHang";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2> Còn hàng</h2>
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+            <div class="panel panel-default">
+                <div class="panel panel-heading">
+                    @item.ten
+                    @Html.ActionLink("Follow", "Index", "YeuThich", new { id = item.mapet }, new { @class = "pull-right" })
+                </div>
+                <div class="panel-body">
+                    <p><img src="@item.hinh" alt="hinh thumbnail" height="250px" width="250px"></p>
+                    
+                    <p><strong>Xuất sứ:</strong>@item.xuatsu</p>
+                    <p><strong>Giá:</strong>@item.giaban<strong>VNĐ</strong></p>
+                    <p><strong>Ngày cập nhật:</strong>@item.ngaycapnhat</p>
+                    <p><strong>Số lượng tồn:</strong>@item.soluong </p>
+                </div>
+                <div class="panel-footer" clearfix>
+                    <div class="DatMua">
+                        <a class="btn btn-success" href="@Url.Action("ThemGioHang", "GioHang",new { @id = item.mapet, @strURL = Request.Url.ToString() })">Đặt mua</a>
+                        @Html.ActionLink("Xem thêm...", "Detail", new { id = item.mapet }, new { @class = "btn btn-default" })
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    }
+</div>

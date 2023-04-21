@@ -1,0 +1,30 @@
+﻿@model IEnumerable<webpet.Models.Pet>
+
+@{
+    ViewBag.Title = "SapMoBan";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Sắp mở bán</h2>
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+            <div class="panel panel-default">
+                <div class="panel panel-heading">
+                    @item.ten
+                    @Html.ActionLink("Follow", "Index", "YeuThich", new { id = item.mapet }, new { @class = "pull-right" })
+                </div>
+                <div class="panel-body">
+                    <p><img src="@item.hinh" alt="hinh thumbnail" height="250px" width="250px"></p>
+                    <p><strong>Xuất sứ:</strong>@item.xuatsu</p>
+                    <p><strong>Giá:</strong>@item.giaban<strong>VNĐ</strong></p>
+                    <p><strong>Ngày cập nhật:</strong>@item.ngaycapnhat</p>
+                    <p><strong>Số lượng tồn:</strong>@item.soluong</p>
+                    <p"><strong>Ngày mở bán:</strong>@item.ngaymoban</p">
+                </div>
+
+            </div>
+        </div>
+    }
+</div>
